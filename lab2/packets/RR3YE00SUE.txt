@@ -1,0 +1,15 @@
+RAW content: 451000284ed1400041066778c0a80101c0a801250050ce8a66af05f3d3bab0d350100ec15d910000
+IP version: 4
+Header size: 5
+DSCP: 4
+ECN: 0
+Package size: 40
+ID: 20177
+Flags: 010
+Margin:0
+TTL: 65
+Protocol: 6
+CRC32: 6778
+Source IP: 192:168:1:1
+Destination IP: 192:168:1:37
+Options: Data: 0050ce8a66af05f3d3bab0d350100ec15d910000

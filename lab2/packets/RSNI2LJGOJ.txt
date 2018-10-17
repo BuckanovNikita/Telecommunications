@@ -1,0 +1,15 @@
+RAW content: 451000285d0640003a06484a57f081b2c0a8012501bbce4711327068577d21f95011003e49120000
+IP version: 4
+Header size: 5
+DSCP: 4
+ECN: 0
+Package size: 40
+ID: 23814
+Flags: 010
+Margin:0
+TTL: 58
+Protocol: 6
+CRC32: 484a
+Source IP: 87:240:129:178
+Destination IP: 192:168:1:37
+Options: Data: 01bbce4711327068577d21f95011003e49120000

@@ -1,0 +1,15 @@
+RAW content: 450000291c40400080060000c0a80125d5b4cc52cdbe01bb80156a2452c831135010010163f0000000
+IP version: 4
+Header size: 5
+DSCP: 0
+ECN: 0
+Package size: 41
+ID: 7232
+Flags: 010
+Margin:0
+TTL: 128
+Protocol: 6
+CRC32: 0000
+Source IP: 192:168:1:37
+Destination IP: 213:180:204:82
+Options: Data: cdbe01bb80156a2452c831135010010163f0000000

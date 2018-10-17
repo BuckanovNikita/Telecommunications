@@ -1,0 +1,15 @@
+RAW content: 450000281b7e400080060000c0a80125adc297a9c93401bb6dbb90fe7e7a4e735010264807540000
+IP version: 4
+Header size: 5
+DSCP: 0
+ECN: 0
+Package size: 40
+ID: 7038
+Flags: 010
+Margin:0
+TTL: 128
+Protocol: 6
+CRC32: 0000
+Source IP: 192:168:1:37
+Destination IP: 173:194:151:169
+Options: Data: c93401bb6dbb90fe7e7a4e735010264807540000

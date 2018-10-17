@@ -1,0 +1,15 @@
+RAW content: 450000295e70400080060000c0a801254a7d8377ce0f01bbd5ff5a169f2166c5501001028fdd000000
+IP version: 4
+Header size: 5
+DSCP: 0
+ECN: 0
+Package size: 41
+ID: 24176
+Flags: 010
+Margin:0
+TTL: 128
+Protocol: 6
+CRC32: 0000
+Source IP: 192:168:1:37
+Destination IP: 74:125:131:119
+Options: Data: ce0f01bbd5ff5a169f2166c5501001028fdd000000

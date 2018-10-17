@@ -1,0 +1,15 @@
+RAW content: 450000280600400080060000c0a8012540e9a5c6c52c01bb834b4fd6a6f061d850101329a8970000
+IP version: 4
+Header size: 5
+DSCP: 0
+ECN: 0
+Package size: 40
+ID: 1536
+Flags: 010
+Margin:0
+TTL: 128
+Protocol: 6
+CRC32: 0000
+Source IP: 192:168:1:37
+Destination IP: 64:233:165:198
+Options: Data: c52c01bb834b4fd6a6f061d850101329a8970000

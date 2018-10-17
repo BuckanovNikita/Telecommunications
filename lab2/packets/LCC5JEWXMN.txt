@@ -1,0 +1,15 @@
+RAW content: 45100028191c400041069d2dc0a80101c0a801250050ce553cfa865b3a53031050100ec14e3e0000
+IP version: 4
+Header size: 5
+DSCP: 4
+ECN: 0
+Package size: 40
+ID: 6428
+Flags: 010
+Margin:0
+TTL: 65
+Protocol: 6
+CRC32: 9d2d
+Source IP: 192:168:1:1
+Destination IP: 192:168:1:37
+Options: Data: 0050ce553cfa865b3a53031050100ec14e3e0000

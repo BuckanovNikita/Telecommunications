@@ -1,4 +1,4 @@
-from ip_package import *
+from IPPackage import *
 import sys
 from PyQt5.QtWidgets import *
 from RawSocket import RawSocket

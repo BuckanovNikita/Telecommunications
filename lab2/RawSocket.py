@@ -1,5 +1,5 @@
 from socket import *
-from ip_package import *
+from IPPackage import *
 import sys
 from PyQt5.QtWidgets import *
 from PyQt5.QtCore import *
@@ -38,7 +38,7 @@ class RawSocket(QThread):
                 self.sock = socket(AF_INET, SOCK_RAW, IPPROTO_IP)
                 self.name = gethostname()
                 self.address = gethostbyname(self.name)
-                socket.bind(self.sock, (self.address, 80))
+                socket.bind(self.sock, (self.address, 100))
                 socket.ioctl(self.sock, SIO_RCVALL, 1)
                 self.need_init = False
             while self.sock:

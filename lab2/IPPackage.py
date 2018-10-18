@@ -1,4 +1,5 @@
 from bitarray import bitarray
+from TcpHeader import TcpHeader
 
 
 class IPPackage:
@@ -60,6 +61,11 @@ class IPPackage:
         for t in self.options:
             options_str += str(t)
 
+        if self.protocol == 6:
+            tcp_header = str(TcpHeader(self.data))
+        else:
+            tcp_header = ''
+
         return f'RAW content: {self.original.tobytes().hex()}\n'\
                f'IP version: {self.version}\n' \
                f'Header size: {self.header_size}\n'\
@@ -75,7 +81,8 @@ class IPPackage:
                f'Source IP: {ip1}\n'\
                f'Destination IP: {ip2}\n'\
                f'Options: {options_str}\n'\
-               f'Data: {self.data.tobytes().hex()}'
+               f'Data: {self.data.tobytes().hex()}\n'\
+               f'{tcp_header}'
         
 
 class Option:

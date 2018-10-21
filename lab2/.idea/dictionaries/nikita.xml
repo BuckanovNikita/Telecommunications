@@ -2,6 +2,7 @@
   <dictionary name="nikita">
     <words>
       <w>dscp</w>
+      <w>icmp</w>
     </words>
   </dictionary>
 </component>

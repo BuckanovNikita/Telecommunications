@@ -1,5 +1,8 @@
 from bitarray import bitarray
+from IcmpHeader import IcmpHeader
 from TcpHeader import TcpHeader
+from UdpHeader import UdpHeader
+import re
 
 
 class IPPackage:
@@ -19,17 +22,16 @@ class IPPackage:
         self.protocol = int(bits[72:80].to01(), 2)
         self.crc = bits[80:96].tobytes().hex()
         self.data = bits[self.header_size * 32:]
-        self.original = bits
 
-        self.source_address = [int(bits[96:104].to01(), 2),
-                               int(bits[104:112].to01(), 2),
-                               int(bits[112:120].to01(), 2),
-                               int(bits[120:128].to01(), 2)]
+        source_address = [int(bits[96:104].to01(), 2),
+                          int(bits[104:112].to01(), 2),
+                          int(bits[112:120].to01(), 2),
+                          int(bits[120:128].to01(), 2)]
 
-        self.destination_address = [int(bits[128:136].to01(), 2),
-                                    int(bits[136:144].to01(), 2),
-                                    int(bits[144:152].to01(), 2),
-                                    int(bits[152:160].to01(), 2)]
+        destination_address = [int(bits[128:136].to01(), 2),
+                               int(bits[136:144].to01(), 2),
+                               int(bits[144:152].to01(), 2),
+                               int(bits[152:160].to01(), 2)]
         self.options = []
 
         if self.header_size > 5:
@@ -46,43 +48,63 @@ class IPPackage:
                 i += max(8, option_size)
                 self.options.append(Option(option_type, option_size, option_args))
 
-    def __str__(self):
-        ip1 = ''
-        for t in self.source_address:
-            ip1 = ip1 + str(t)+':'
-        ip1 = ip1[:-1]
+        self.source_ip = ''
+        for t in source_address:
+            self.source_ip = self.source_ip + str(t) + ':'
+        self.source_ip = self.source_ip[:-1]
 
-        ip2 = ''
-        for t in self.destination_address:
-            ip2 = ip2 + str(t) + ':'
-        ip2 = ip2[:-1]
+        self.destination_ip = ''
+        for t in destination_address:
+            self.destination_ip = self.destination_ip + str(t) + ':'
+        self.destination_ip = self.destination_ip[:-1]
 
-        options_str = ''
+        self.options_str = ''
         for t in self.options:
-            options_str += str(t)
+            self.options_str += str(t)
 
         if self.protocol == 6:
-            tcp_header = str(TcpHeader(self.data))
+            self.header = str(TcpHeader(self.data))
+        elif self.protocol == 17:
+            self.header = str(UdpHeader(self.data))
+        elif self.protocol == 1:
+            self.header = str(IcmpHeader(self.data))
         else:
-            tcp_header = ''
+            self.header = ''
 
-        return f'RAW content: {self.original.tobytes().hex()}\n'\
-               f'IP version: {self.version}\n' \
-               f'Header size: {self.header_size}\n'\
-               f'DSCP: {self.dscp}\n'\
-               f'ECN: {self.ecn}\n'\
-               f'Package size: {self.full_size}\n'\
-               f'ID: {self.id}\n'\
-               f'Flags: {self.flags}\n'\
-               f'Margin:{self.margin}\n'\
-               f'TTL: {self.ttl}\n'\
-               f'Protocol: {self.protocol}\n'\
-               f'CRC32: {self.crc}\n'\
-               f'Source IP: {ip1}\n'\
-               f'Destination IP: {ip2}\n'\
-               f'Options: {options_str}\n'\
-               f'Data: {self.data.tobytes().hex()}\n'\
-               f'{tcp_header}'
+        raw_content = self.original
+        raw_content = re.findall('..', raw_content)
+        self.raw_str = '\n'
+
+        for i, t in enumerate(raw_content):
+            self.raw_str += t + ' '
+            if i > 0 and i % 40 == 0:
+                self.raw_str += '\n'
+
+        self.ascii_str = '\n'
+        for i, t in enumerate(raw_content):
+            try:
+                self.ascii_str += bytes.fromhex(t).decode('utf-8')
+            except Exception as e:
+                self.ascii_str += ''
+            if i > 0 and i % 40 == 0:
+                self.ascii_str += '\n'
+
+    def __str__(self):
+        return f"IP version: {self.version}\n" \
+               f"Header size: {self.header_size}\n" \
+               f"DSCP: {self.dscp}\n" \
+               f"ECN: {self.ecn}\n" \
+               f"Package size: {self.full_size}\n" \
+               f"ID: {self.id}\n" \
+               f"Flags: {self.flags}\n" \
+               f"Margin:{self.margin}\n" \
+               f"TTL: {self.ttl}\n" \
+               f"Protocol: {self.protocol}\n" \
+               f"CRC32: {self.crc}\n" \
+               f"Source IP: {self.source_ip}\n" \
+               f"Destination IP: {self.destination_ip}\n" \
+               f"Options: {self.options_str}\n" \
+               f"{self.header}"
         
 
 class Option:
@@ -92,6 +114,6 @@ class Option:
         self.args = args
 
     def __str__(self):
-        return f'Type: {self.type_}\n'\
+        return f'Type: {self.type}\n'\
                f'Size: {self.size}\n'\
                f'Args: {self.args}\n'

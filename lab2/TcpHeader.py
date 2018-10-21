@@ -1,11 +1,5 @@
-from bitarray import bitarray
-
-
 class TcpHeader:
     def __init__(self, bits):
-        # self.original = bytes_.hex()
-        # bits = bitarray(endian='big')
-        # bits.frombytes(bytes_)
         self.source_port = int(bits[0:16].to01(), 2)
         self.destination_port = int(bits[16:32].to01(), 2)
         self.sn = int(bits[32:64].to01(), 2)
@@ -17,6 +11,7 @@ class TcpHeader:
         self.crc = bits[128:144].tobytes().hex()
         self.priority = int(bits[144:160].to01(), 2)
         self.options = bits[160:32 * self.header_size].tobytes().hex()
+        self.data = bits[32*self.header_size:].tobytes().hex()
 
     def __str__(self):
         return f"Source port: {self.source_port}\n" \

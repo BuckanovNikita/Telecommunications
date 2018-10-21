@@ -1,7 +1,5 @@
 from socket import *
 from IPPackage import *
-import sys
-from PyQt5.QtWidgets import *
 from PyQt5.QtCore import *
 
 buf_size = 64 * 1024 * 8
@@ -50,5 +48,5 @@ class RawSocket(QThread):
                 except Exception as ex:
                     print(ex)
                     break
-                QThread.msleep(1000)
-            QThread.msleep(1000)
+                QThread.msleep(100)
+            QThread.msleep(100)

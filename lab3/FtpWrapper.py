@@ -1,8 +1,7 @@
 from PyQt5.QtCore import *
 from ftplib import FTP
 import datetime
-from FileWriter import FileWriter
-from PyQt5.QtWidgets import *
+
 
 class FtpWrapper(QThread):
     progress = pyqtSignal(['int'])
@@ -20,9 +19,6 @@ class FtpWrapper(QThread):
     def __del__(self):
         self.wait()
 
-    def setText(self, text):
-        self.text = text
-
     def write(self, block):
         self.get += len(block)
         done = int(100*self.get / self.size)
@@ -34,11 +30,11 @@ class FtpWrapper(QThread):
               'path: ' + self.path + '/' + self.file_name + '\n' + \
               'time: ' + str(datetime.datetime.now().strftime("%Y-%m-%d %H:%M")) + '\n'
         try:
-            self.bad.emit('Wait for connection to '+ self.server_name)
+            self.bad.emit('Wait for connection to ' + self.server_name)
             ftp = FTP(self.server_name)
             self.bad.emit('Wait for connected to ' + self.server_name)
         except Exception as ex:
-            msg +=ex
+            msg += ex
             return
         try:
             ftp.login()

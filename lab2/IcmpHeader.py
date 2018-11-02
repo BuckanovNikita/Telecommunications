@@ -1,11 +1,54 @@
-class IcmpHeader:
-    def __init__(self, bits):
-        self.type = int(bits[0:8].to01(), 2)
-        self.code = int(bits[8:16].to01(), 2)
-        self.crc = bits[16:24].tobytes().hex()
-        self.data = bits[24:].tobytes().hex()
+import struct
 
-    def __str__(self):
-        return f'ICMP type: {self.type}\n'\
-               f'ICMP code: {self.code}\n'\
-               f'CRC: {self.crc}\n' \
+
+class IcmpHeader:
+    ICMP_STRUCTURE_FMT = 'bbHHh'
+
+    def __init__(self, icmp_type,
+                 icmp_code=0,
+                 icmp_crc=0,
+                 icmp_id=1,
+                 icmp_seq=1,
+                 data=''):
+        self.icmp_type = icmp_type
+        self.icmp_code = icmp_code
+        self.icmp_crc = icmp_crc
+        self.icmp_id = icmp_id
+        self.icmp_seq = icmp_seq
+        self.data = data
+        self.raw = None
+        self.create_icmp_field()
+
+    def create_icmp_field(self):
+        self.raw = struct.pack(self.ICMP_STRUCTURE_FMT,
+                               self.icmp_type,
+                               self.icmp_code,
+                               self.icmp_crc,
+                               self.icmp_id,
+                               self.icmp_seq,
+                               )
+
+        self.icmp_crc = IcmpHeader.crc(self.raw + self.data.encode())
+
+        self.raw = struct.pack(self.ICMP_STRUCTURE_FMT,
+                               self.icmp_type,
+                               self.icmp_code,
+                               self.icmp_crc,
+                               self.icmp_id,
+                               self.icmp_seq,
+                               )
+
+    @staticmethod
+    def crc(data):
+        s = 0
+
+        for i in range(0, len(data), 2):
+            a = data[i]
+            b = data[i+1]
+
+            s = s + (a + (b << 8))
+
+        s = s + (s >> 16)
+        s = ~s & 0xffff
+
+        return s

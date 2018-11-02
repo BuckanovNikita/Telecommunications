@@ -4,8 +4,8 @@ from TcpHeader import TcpHeader
 from UdpHeader import UdpHeader
 import re
 
-
 class IPPackage:
+
     def __init__(self, bytes_):
         self.original = bytes_.hex()
         bits = bitarray(endian='big')

@@ -14,7 +14,7 @@ class HttpWrapper(QThread):
     def __del__(self):
         self.wait()
 
-    def setText(self, text):
+    def set_text(self, text):
         self.text = text
 
     def run(self):
@@ -40,4 +40,4 @@ class HttpWrapper(QThread):
             self.end.emit(result.decode('utf-8'))
             self.progress.emit(100)
         except Exception as e:
-           print(e)
+            print(e)

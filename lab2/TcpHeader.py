@@ -1,4 +1,6 @@
+
 class TcpHeader:
+
     def __init__(self, bits):
         self.source_port = int(bits[0:16].to01(), 2)
         self.destination_port = int(bits[16:32].to01(), 2)

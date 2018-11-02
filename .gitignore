@@ -105,3 +105,6 @@ venv.bak/
 *.txt
 *.xml
 *.txt
+*.xml
+*.xml
+lab2/.idea/workspace.xml

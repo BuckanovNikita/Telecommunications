@@ -67,7 +67,7 @@ class IPPackage:
         elif self.protocol == 17:
             self.header = str(UdpHeader(self.data))
         elif self.protocol == 1:
-            self.header = str(IcmpHeader(self.data))
+            self.header = IcmpHeader.decode(self.data.tobytes())
         else:
             self.header = ''
 
@@ -91,20 +91,19 @@ class IPPackage:
 
     def __str__(self):
         return f"IP version: {self.version}\n" \
-               f"Header size: {self.header_size}\n" \
+               f"Header size: {self.header_size}    " \
                f"DSCP: {self.dscp}\n" \
-               f"ECN: {self.ecn}\n" \
+               f"ECN: {self.ecn}    " \
                f"Package size: {self.full_size}\n" \
-               f"ID: {self.id}\n" \
+               f"ID: {self.id}  " \
                f"Flags: {self.flags}\n" \
-               f"Margin:{self.margin}\n" \
+               f"Margin:{self.margin}   " \
                f"TTL: {self.ttl}\n" \
-               f"Protocol: {self.protocol}\n" \
+               f"Protocol: {self.protocol}  " \
                f"CRC32: {self.crc}\n" \
-               f"Source IP: {self.source_ip}\n" \
+               f"Source IP: {self.source_ip}    " \
                f"Destination IP: {self.destination_ip}\n" \
-               f"Options: {self.options_str}\n" \
-               f"{self.header}"
+               f"Content header:\n {self.header}\n"
         
 
 class Option:

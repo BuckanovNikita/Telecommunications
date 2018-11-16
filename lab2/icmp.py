@@ -22,7 +22,7 @@ def generate1():
         return
 
     try:
-        s = socket.socket(socket.AF_INET, socket.SOCK_RAW, socket.getprotobyname('ICMP'))
+        s = socket.socket(socket.AF_INET, socket.SOCK_RAW, socket.IPPROTO_ICMP)
         package = IcmpHeader(type_, code_)
         s.sendto(package.raw, (destination_ip.text(), 0))
     except Exception as msg:

@@ -7,13 +7,13 @@ def control():
     http_wrapper.set_text(request_field.text())
     http_wrapper.start()
 
+
 if __name__ == '__main__':
     try:
         app = QApplication(sys.argv)
         main_window = QWidget()
         main_window.setWindowTitle('lab 3 task 4')
         main_window.setLayout(QVBoxLayout())
-
 
         request_field = QLineEdit()
         request_field.setText("https://stackoverflow.com/questions/22571259/split-a-string-into-n-equal-parts")

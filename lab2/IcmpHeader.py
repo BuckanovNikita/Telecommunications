@@ -39,6 +39,11 @@ class IcmpHeader:
                                )
 
     @staticmethod
+    def decode(data):
+        x = str(struct.unpack(IcmpHeader.ICMP_STRUCTURE_FMT, data))
+        return f'Type:{x[0]} Code:{x[1]} CRC:{x[2]} ID:{x[3]} Seq:{x[4]}'
+
+    @staticmethod
     def crc(data):
         s = 0
 

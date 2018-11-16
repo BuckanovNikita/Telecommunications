@@ -109,3 +109,5 @@ venv.bak/
 *.xml
 lab2/.idea/workspace.xml
 lab4/login_password.py
+*.iml
+*.xml

@@ -21,6 +21,7 @@ def imaputf7encode(s):
         out+='&'+base64.b64encode(unipart.encode('utf-16-be')).decode('ascii').rstrip('=')+'-'
     return out
 
+
 class MailWidget(QWidget):
 
     def __init__(self, msg, parent=None):
@@ -45,12 +46,13 @@ class MailWidget(QWidget):
                 mail_edit.append(part.get_payload())
 
 
-def MessageConstructor(msg):
+def message_constructor(msg):
     item = QListWidgetItem(mail_list)
     item_widget = MailWidget(msg)
     item.setSizeHint(item_widget.sizeHint())
     mail_list.addItem(item)
     mail_list.setItemWidget(item, item_widget)
+
 
 class FolderWidget(QWidget):
     def __init__(self, name, parent=None):
@@ -72,10 +74,12 @@ class FolderWidget(QWidget):
     def select(self):
         mail_list.clear()
         self.s = ImapSelector(imap, self.name)
-        self.s.message.connect(MessageConstructor)
+        self.s.message.connect(message_constructor)
+
 
 imap = None
 imap_thread = None
+
 
 def create_folders(name_list):
     for t in name_list:
@@ -84,6 +88,7 @@ def create_folders(name_list):
         item.setSizeHint(item_widget.sizeHint())
         folder_list.addItem(item)
         folder_list.setItemWidget(item, item_widget)
+
 
 def get():
     global imap

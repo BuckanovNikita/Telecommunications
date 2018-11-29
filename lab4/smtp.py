@@ -25,7 +25,7 @@ def send():
 
 if __name__ == '__main__':
     email = login
-    dest_email = 'buckanov32@gmail.com'
+    dest_email = 'vladimir.karnygin@gmail.com'
 
     try:
         app = QApplication(sys.argv)
@@ -34,7 +34,7 @@ if __name__ == '__main__':
         main_window.setLayout(QVBoxLayout())
 
         destination_field = QLineEdit()
-        destination_field.setText('buckanov32@gmail.com')
+        destination_field.setText('vladimir.karnygin@gmail.com')
         subject_field = QLineEdit()
         mail_field = QTextEdit()
 

@@ -48,5 +48,5 @@ class RawSocket(QThread):
                 except Exception as ex:
                     print(ex)
                     break
-                QThread.msleep(100)
-            QThread.msleep(100)
+                QThread.msleep(1)
+            QThread.msleep(1)

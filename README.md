@@ -1,2 +1,2 @@
-# telecommunications
+# Telecommunications
 Сети и Телекоммуникации. МИЭТ
